@@ -1,0 +1,70 @@
+<div id="type_car">
+    <mat-button-toggle-group aria-label="Font Style">
+        <mat-button-toggle [ngClass]="{'active': type_car === 1 }" [checked]="type_car === 1" (click)="reset(1)" value="bold">{{ type_auto_1 }}
+        </mat-button-toggle>
+        <mat-button-toggle [ngClass]="{'active': type_car === 2 }" [checked]="type_car === 2" (click)="reset(2)" value="italic">{{ type_auto_2 }}
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
+
+<div id="content_calculator">
+    <div *ngFor="let shoe of typesOfServices">
+        <div class="level_1">
+            <button id="{{shoe.id}}" [ngClass]="{'active': active_level1 === shoe.id }" (click)="click_level_1(shoe.id)" mat-button>{{shoe.value}}</button>
+        </div>
+        <div [hidden]="active_level1 !== shoe.id" [ngClass]="{'active_submenu': active_level1 === shoe.id }" class="level_2">
+            <div style="display: inline-flex; width: 100%;" *ngFor="let sub of shoe.subs">
+                <button [style.margin-top]="sub.id === shoe.id + 0.1 ? '15px' : null" [ngClass]="{'active': active_level2 === sub.id }" id="{{sub.id}}" (click)="click_level_2(sub.id)" mat-button>{{sub.value}}</button>
+                <div [hidden]="active_level2 !== sub.id" class="level_3">
+                    <div class="sub">
+                        <mat-expansion-panel class="accordion" [style.margin-top]="service.id === 1 ? '15px' : '1px'" *ngFor="let service of sub.services" [disabled]="true" #mep="matExpansionPanel" [ngClass]="{'selected': service.selected }">
+                            <mat-expansion-panel-header class="header">
+                                <i class="material-icons" (click)="mep.expanded = !mep.expanded;">
+                                    keyboard_arrow_down
+                                </i>
+                                <mat-panel-title (click)='selectService(service.name, type_car === 1 ? service.price : service.price2, service.id, shoe.id, sub.id)'>
+                                    {{service.name}}
+                                </mat-panel-title>
+                                <mat-panel-description (click)='selectService(service.name, type_car === 1 ? service.price : service.price2, service.id, shoe.id, sub.id)'>
+                                    {{type_car === 1 ? service.price : service.price2}} ₽
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <p [innerHTML]="service.description"></p>
+                        </mat-expansion-panel>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="price_calculator">
+    <mat-selection-list #services>
+        <mat-list-option class="list_item" *ngFor="let s of addingServices" [disabled]="false" (click)="services.selectAll()" [selected]="true">
+            <span style="width: 70%;">{{s.name}}</span>
+            <span>{{s.price}}</span>
+        </mat-list-option>
+    </mat-selection-list>
+    <p>
+        <b>Итого: {{amount}} ₽</b>
+    </p>
+
+    <form class="uk-form-stacked uk-text-center uk-margin-auto" action="#">
+        <input class="" type="hidden" name="Тип кузова" [value]="type_car === 1 ? type_auto_1 : type_auto_2">
+        <input class="" type="hidden" name="Услуга {{i + 1}}" *ngFor="let s of addingServices; let i = index" value="{{s.name}} - {{s.price}}">
+
+        <div>
+            <mat-form-field style="width: 15%;">
+                <input name="Ваше имя" matInput class="required uk-animation-shake uk-margin uk-input" placeholder="Ваше имя">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field style="width: 15%;">
+                <input name="Телефон" matInput class="phone required uk-animation-shake uk-margin uk-input" placeholder="Номер телефона">
+            </mat-form-field>
+        </div>
+        <button style="border-radius: 0px; width: 15%;" data-rf-call="12" mat-raised-button color="primary" class="uk-button uk-button-primary rf-button-send uk-width-medium@s uk-margin-auto" (click)="zakaz()">Записаться на сервис</button>
+    </form>
+
+</div>

@@ -1,0 +1,107 @@
+#content_calculator {
+    height: 50%;
+    background-color: #eee;
+    .level_1 {
+        display: inline-block;
+        width: 20%;
+
+        .mat-button {
+            height: 48px;
+            width: 100%;
+            text-align: left;
+            border-radius: 0px;
+            border-right: 1px solid white;
+        }
+
+        ::ng-deep {
+            .mat-button-focus-overlay {
+                background-color: #f47d32;
+                color: #ffffff
+            }
+        }
+
+        .active {
+            background-color: #f47d32;
+            color: #ffffff;
+        }
+    }
+
+    .level_2 {
+        margin-top: 60px;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+
+        .mat-button {
+            height: 48px;
+            width: 25%;
+            text-align: left;
+            border-radius: 0px;
+            border-right: 1px solid white;
+        }
+
+        .mat-button:hover {
+            background-color: #2b2a29;
+            color: #ffffff
+        }
+
+        .active {
+            background-color: #2b2a29;
+            color: #ffffff;
+        }
+    }
+
+    .level_3 {
+        width: 55%;
+
+        .sub {
+            position: absolute;
+            top: 0px;
+            width: 55%;
+            overflow: auto;
+            height: 400%;
+            .accordion {
+                border-radius: 0px;
+                box-shadow: none;
+                background-color: #d8d8d8;
+
+                .header {
+                    color: black;
+                }
+
+                .header:hover {
+                    background-color: #f47d32;
+                    cursor: pointer;
+                }
+            }
+            .selected {
+                background-color: #f47d32;
+            }
+        }
+    }
+
+    .active_submenu {
+        display: inline-grid;
+    }
+}
+
+#price_calculator {
+    ::ng-deep {
+        .mat-list-text {
+            flex-direction: initial;
+        }
+        .mat-pseudo-checkbox {
+            background: #49652d;
+        }
+    }
+
+    .list_item {
+        width: 50%; 
+        background-color: rgba(244,125,50,0.15);
+    }
+    
+}
+
+#type_car {
+    margin-bottom: 25px;
+}
